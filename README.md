@@ -1,12 +1,3 @@
-"# playwright"
-
-
-
-pip install playwright
-
-playwright install
-
-
 📘 Playwright All‑in‑One README (Python Sync API)
 🔹 Core Concepts
 Browser → Launch Chromium, Firefox, or WebKit.
@@ -15,14 +6,14 @@ Context → Isolated browser session (cookies, storage, viewport, locale).
 
 Page → Represents a single tab where actions happen.
 
-Selectors → Identify elements (get_by_label, get_by_role, locator, CSS, XPath).
+Locators → Handles to find and interact with elements. Lazy, auto‑waiting, chainable.
 
-🔹 Selector Types (Deep Dive)
-Role Selectors → Based on ARIA roles (button, checkbox, radio, link, textbox). Use name for visible text.
+🔹 Selector Types
+Role Selectors → Based on ARIA roles (button, checkbox, radio, link, textbox). Filter by name.
 
 Label Selectors → Match inputs linked to <label>.
 
-Placeholder Selectors → Match by placeholder text.
+Placeholder Selectors → Match input fields by placeholder text.
 
 Text Selectors → Match visible text content.
 
@@ -34,20 +25,29 @@ Test ID Selectors → Match data-testid attributes (stable automation hooks).
 
 CSS/XPath → Powerful but less stable; use for complex DOM structures.
 
+🔹 Locator Features
+Chaining → Refine locators step by step.
+
+Filtering → Use .nth(), .first, .last.
+
+Assertions → Check visibility, state, values.
+
+Actions → click, fill, check, hover, press.
+
 🔹 Common Actions
-Form Inputs → fill, check, uncheck, select_option.
+Form Inputs → Fill text, check/uncheck boxes, select options.
 
-Clicks → click, with options for position, modifiers, force.
+Clicks → Normal, double, right‑click, with position or modifiers.
 
-Keyboard → press, type, insert_text.
+Keyboard → Press keys, type text, insert text.
 
-Mouse → click, dblclick, hover, drag_to.
+Mouse → Click, hover, drag & drop.
 
 🔹 Navigation
 goto, reload, go_back, go_forward.
 
 🔹 Waiting
-Timeouts → wait_for_timeout(ms) (hard wait).
+Timeouts → Hard wait with wait_for_timeout.
 
 Element Waits → wait_for_selector, wait_for_load_state.
 
@@ -61,15 +61,15 @@ Values → input_value, text_content.
 Navigation → url, title.
 
 🔹 Dialogs
-Handle alerts, confirms, prompts with dialog.accept() or dialog.dismiss().
+Handle alerts, confirms, prompts with accept() or dismiss().
 
 🔹 File Handling
-Upload → set_input_files.
+Upload → Attach files with set_input_files.
 
-Download → expect_download → save_as.
+Download → Capture with expect_download and save.
 
 🔹 Frames & Popups
-Frames → Access with page.frame(name="...").
+Frames → Access nested frames with page.frame(name="...").
 
 Popups → Capture new tabs/windows with expect_popup.
 
@@ -85,15 +85,30 @@ Network Control → Intercept requests, mock responses.
 Storage State → Save/load cookies and local storage.
 
 🔹 Best Practices
-Prefer role/label/test‑id selectors over CSS/XPath.
+Prefer role/label/test‑id selectors → stable and readable.
+
+Avoid brittle CSS/XPath unless necessary.
+
+Use semantic attributes (ARIA roles, labels).
+
+Chain locators for nested elements.
 
 Use explicit waits instead of arbitrary timeouts.
 
 Keep tests atomic (one scenario per test).
 
-Use contexts to isolate sessions.
-
 Always clean up with page.close(), context.close(), browser.close().
+
+| Selector Type | Example | Best Use Case | Stability |
+| --- | --- | --- | --- |
+| Role | ``get_by_role("button")`` | Buttons, links, checkboxes | High |
+| Label | ``get_by_label("Email")`` | Form inputs tied to labels | High |
+| Placeholder | ``get_by_placeholder("Search")`` | Search boxes, text inputs | Medium |
+| Text | ``get_by_text("Submit")`` | Buttons, headings, visible text | Medium |
+| Alt Text | ``get_by_alt_text("Logo")`` | Images with alt attributes | High |
+| Title | ``get_by_title("Close")`` | Elements with tooltip/title | Medium |
+| Test ID | ``get_by_test_id("id")`` | Stable automation hooks | Very High |
+| CSS/XPath | ``locator("css=div ``> ``p")`` | Complex DOM, fallback | Low–Medium |
 
 🔹 Typical Workflow
 Launch browser → create context → open page.
