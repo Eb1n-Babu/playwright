@@ -1,5 +1,6 @@
 from playwright.async_api import async_playwright
 import asyncio
+from decouple import config
 
 
 async def main():
@@ -10,8 +11,8 @@ async def main():
 
         await page.goto("https://dcbookstore.com/")
         await page.get_by_text("Login").click()
-        await page.get_by_placeholder("User Name").fill("wacot15348@badgerhole.com")
-        await page.get_by_placeholder("Password").fill(".}5@duj4Wy?=;]P")
+        await page.get_by_placeholder("User Name").fill(config("USER_NAME"))
+        await page.get_by_placeholder("Password").fill(config("PASSWORD_"))
         await page.get_by_role("button", name="LOGIN").click()
         await page.wait_for_timeout(1000)
         await page.go_back()
