@@ -9,7 +9,8 @@ async def main():
 
         page = await context.new_page()
         await page.goto("https://facebook.com")
-        await page.wait_for_timeout(200)
+        await page.wait_for_timeout(2000)
+        
 
 if __name__ == '__main__':
     asyncio.run(main())
