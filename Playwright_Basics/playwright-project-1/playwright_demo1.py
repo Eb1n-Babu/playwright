@@ -17,7 +17,7 @@ def run_playwright_demo():
         print("Loaded HTML snippet:", page.content()[:100])  # Just a sneak peek!
 
         # Capture screenshot after everything's ready
-        page.screenshot(path=r"./screenshot.png")
+        page.screenshot(path=r"screenshot.png")
         print("Screenshot captured successfully! 📸")
 
         browser.close()

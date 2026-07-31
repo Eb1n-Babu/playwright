@@ -7,7 +7,7 @@ def playwrightDemo():
         page = browser.new_page()
         page.goto("https://www.realmadrid.com/en-US")
         print("page title",page.title())
-        page.screenshot(path=r"./screenshot.png")
+        page.screenshot(path=r"screenshot.png")
         print("Screenshot saved as screenshot.png" )
         browser.close()
 
