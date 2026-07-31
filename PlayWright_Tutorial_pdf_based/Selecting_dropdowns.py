@@ -13,6 +13,11 @@ async def main():
         await page.wait_for_timeout(20000)
 
 
+
+
+
+
 if __name__ == '__main__':
-    asyncio.run(main())
+    """asyncio.run(main())"""
+    asyncio.run(facebook())
 
